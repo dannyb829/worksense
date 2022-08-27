@@ -1,25 +1,21 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## worksense
 
-Things you may want to cover:
+# The company chat app - designed to house conversations amongst company employees whether the subject is who needs to change the coffee filter or where the next company retreat should be. Currently in development.
 
-* Ruby version
 
-* System dependencies
+# Technologies
 
-* Configuration
+React.js
 
-* Database creation
+Rails 7
 
-* Database initialization
+rails-actioncable
 
-* How to run the test suite
+react-actioncable
 
-* Services (job queues, cache servers, search engines, etc.)
+postgresdb
 
-* Deployment instructions
 
-* ...
-# worksense
+# creator Daniel Brito
