@@ -1,0 +1,158 @@
+.App {
+  text-align: center;
+}
+
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
+}
+
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.chat-online {
+  color: #34ce57
+}
+
+.chat-offline {
+  color: #e4606d
+}
+
+.chat-messages {
+  display: flex;
+  flex-direction: column;
+  max-height: 800px;
+  overflow-y: scroll
+}
+
+.chat-message-left,
+.chat-message-right {
+  display: flex;
+  flex-shrink: 0
+}
+
+.chat-message-left {
+  margin-right: auto
+}
+
+.chat-message-right {
+  flex-direction: row-reverse;
+  margin-left: auto
+}
+.py-3 {
+  padding-top: 1rem!important;
+  padding-bottom: 1rem!important;
+}
+.px-4 {
+  padding-right: 1.5rem!important;
+  padding-left: 1.5rem!important;
+}
+.flex-grow-0 {
+  flex-grow: 0!important;
+}
+.border-top {
+  border-top: 1px solid #dee2e6!important;
+}
+
+.chat-room {
+  padding: 4rem 2rem;
+  overflow: scroll;
+  background-color: #282c34;
+}
+
+.dark-t-text{
+  color: #fff
+}
+
+nav {
+  color:#fff;
+  box-shadow: 0 7px 15px 0 rgba(0,0,0,.4);
+  z-index: 2;
+}
+
+.purple-lm{
+  background-color: #8723eb;
+}
+
+.shadowed{
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+}
+
+a {
+  color:'white'
+}
+
+.chat-section{
+  position:relative;
+  height: 100%;
+}
+
+.chat-input{
+  position: absolute;
+  bottom: 0;
+  right:0;
+}
+
+.c-pad{
+  padding: 4rem;
+  padding-bottom: 6rem;
+}
+
+.bb-margin{
+  margin: 0 1rem;
+}
+
+.list-pad{
+  padding: 1rem 2rem;
+}
+
+.row {
+  width: 100%;
+  margin: 0;
+  height: 93.6vh;
+}
+
+.scrn-height-vh{
+  height: 93.6vh
+}
+
+.scrn-height{
+  height: 100%
+}
+
+.overflow-scroll{
+  overflow: scroll;
+}
+
+.b-border-right{
+  border-right: .15px solid black;
+}
+
+
