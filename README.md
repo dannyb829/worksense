@@ -17,5 +17,7 @@ react-actioncable
 
 postgresdb
 
+bootstrap css styled
+
 
 # creator Daniel Brito

@@ -10,6 +10,7 @@ import userContext from './CONTEXT/userContext';
 import ThemeContext from './CONTEXT/ThemeContext';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import EditProfile from './PAGES/EditProfile';
 
 
 
@@ -27,7 +28,7 @@ function App() {
     .then(data => setUser(data)) : navigate('/login'))
   },[])
 
-  console.log(localStorage.getItem('darkmode'))
+
 
   function conversationLoad() {
         fetch('/conversations')
@@ -42,7 +43,8 @@ function App() {
     <NavBar/>
     <Routes>
       <Route path='/' element={<Home convoState={{conversations, conversationLoad}}/>} />
-      <Route path='login' element={<Login/>} />
+      <Route path='/login' element={<Login/>} />
+      <Route path='/profile' element={<EditProfile/>} />
       <Route path='/chatroom/:id' element={<ChatRoom convoState={{conversations, conversationLoad}}/>} />
     </Routes>
     <ToastContainer position="bottom-right" theme={isDark.current === 'true' ? 'dark' : 'light'} />

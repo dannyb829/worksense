@@ -22,7 +22,7 @@ export default function Home({ convoState }) {
         <div className={"row no-gutters overflow-scroll" + (isDark.current === 'true' ? " bg-dark" : "")}>
             <div className="col-sm-2"></div>
             <div className={"col-sm-8 px-0 overflow-scroll" + (isDark.current === 'true' ? " bg-dark" : "")} style={{ backgroundColor: (isDark ? "#282c34" : "#fff") }}>
-                <div className='list-group'>
+                <div className='list-group rounded-0'>
                     {displayConvos}
                 </div>
             </div>

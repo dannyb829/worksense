@@ -10,7 +10,7 @@ export default function NavBar(){
   const {user, setUser} = useContext(userContext)
 
   const theme = isDark.current === 'true' ? "dark" : "light"
-console.log(isDark)
+
     function handleThemeSwitch() {
       window.localStorage.setItem('darkmode', (window.localStorage.getItem('darkmode') === 'true' ? 'false' : 'true')) 
       isDark.current = isDark.current === 'true' ? 'false' : 'true'
@@ -57,6 +57,9 @@ console.log(isDark)
               </li> : null}
               <li className="nav-item">
                 <a className="nav-link active" href='#' aria-current="page" onClick={handleThemeSwitch}>Toggle dark mode</a>
+              </li>
+              <li className="nav-item">
+                <a className="nav-link active" href='#' aria-current="page">Edit Profile</a>
               </li>
               <li className="nav-item dropdown">
                 <a

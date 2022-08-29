@@ -29,7 +29,7 @@ const ChatRoom = ({convoState}) => {
             data: id
         },
             {
-                connected() { channel.send({ action: 'convo_load' }) },
+                connected(e) { channel.send({ action: 'convo_load' }) },
                 disconnected() { console.log('disconnected') },
                 received(e) { if (!e?.message) setMessages(e) }
             }
@@ -40,8 +40,6 @@ const ChatRoom = ({convoState}) => {
             channel.unsubscribe()
         }
     }, [id, chatSocket.subscriptions])
-
-
 
 
 
@@ -60,7 +58,7 @@ const ChatRoom = ({convoState}) => {
                         {conversationList}
                     </div>
                 </div>
-                <div className='col-sm-9 c-pad scrn-height overflow-scroll'>
+                <div className='col-sm-9 c-pad scrn-height overflow-scroll' id='chat-display'>
                     {displayMessages}
                 </div>
                 <div className='col-sm-3' ></div>
