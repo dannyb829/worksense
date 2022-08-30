@@ -59,7 +59,7 @@ export default function NavBar(){
                 <a className="nav-link active" href='#' aria-current="page" onClick={handleThemeSwitch}>Toggle dark mode</a>
               </li>
               <li className="nav-item">
-                <a className="nav-link active" href='#' aria-current="page">Edit Profile</a>
+                <a className="nav-link active" href='/profile' aria-current="page">Edit Profile</a>
               </li>
               <li className="nav-item dropdown">
                 <a
