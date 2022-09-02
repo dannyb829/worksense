@@ -10,7 +10,7 @@ export default function UserBubble({message}){
     return (
         <div className="chat-message-right pb-4">
 								<div>
-									<img src="https://bootdey.com/img/Content/avatar/avatar1.png" className="rounded-circle mr-1" alt="Chris Wood" width="40" height="40"/>
+									<img src={message.user?.image_url || "https://bootdey.com/img/Content/avatar/avatar1.png"} className="rounded-circle mr-1" alt="Chris Wood" width="40" height="40"/>
 								</div>
 								<div className="flex-shrink-1 bg-light rounded py-2 px-3 mr-3 bb-margin shadowed">
 									<div className="font-weight-bold mb-1"><b>{`you (${message.user?.username})`}</b></div>

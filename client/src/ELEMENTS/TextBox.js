@@ -1,13 +1,14 @@
 import { useContext, useEffect, useState } from "react"
 import { useParams } from "react-router-dom"
 import userContext from "../CONTEXT/userContext"
+import ReactTooltip from 'react-tooltip'
+
 
 
 export default function TextBox({chatSocket}){
     const [content ,setContent] = useState('') 
     const {user} = useContext(userContext)
     const { id } = useParams()
-
 
     function submitMessage(e) {
         if (content) {
@@ -19,8 +20,9 @@ export default function TextBox({chatSocket}){
     }
 
     return (
-    <div className="flex-grow-0 py-3 px-4">
-        <div className="input-group mb-1">
+    <div className="flex-grow-0 py-3 px-4" data-tip="new messages" >
+    <ReactTooltip place="top" type="info" effect="solid"/>
+        <div className="input-group mb-1" >
             <input type="text" className="form-control " placeholder="Type your message" value={content} onChange={e =>setContent(e.target.value)} />
             <button className="btn btn-primary" onClick={submitMessage}>Send</button>
         </div>

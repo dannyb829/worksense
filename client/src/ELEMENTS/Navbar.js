@@ -8,6 +8,7 @@ export default function NavBar(){
 
   const isDark = useContext(ThemeContext)
   const {user, setUser} = useContext(userContext)
+  const navigate = useNavigate()
 
   const theme = isDark.current === 'true' ? "dark" : "light"
 
@@ -19,7 +20,8 @@ export default function NavBar(){
 
     function handleLogout() {
       fetch('/logout')
-      .then(r => setUser(null))
+      setUser(null)
+      navigate('/login')
     }
 
     return (
@@ -58,10 +60,7 @@ export default function NavBar(){
               <li className="nav-item">
                 <a className="nav-link active" href='#' aria-current="page" onClick={handleThemeSwitch}>Toggle dark mode</a>
               </li>
-              <li className="nav-item">
-                <a className="nav-link active" href='/profile' aria-current="page">Edit Profile</a>
-              </li>
-              <li className="nav-item dropdown">
+              {user ? <li className="nav-item dropdown">
                 <a
                   className="nav-link dropdown-toggle"
                   href="#"
@@ -69,21 +68,12 @@ export default function NavBar(){
                   data-bs-toggle="dropdown"
                   aria-expanded="false"
                 >
-                  Dropdown
+                  Account
                 </a>
-                <ul className={"dropdown-menu dropdown-menu-" + theme} >
-                  <li><a className="dropdown-item" href="#">Action</a></li>
-                  <li><a className="dropdown-item" href="#">Another action</a></li>
-                  <li>
-                    <hr className="dropdown-divider" />
-                  </li>
-                  <li>
-                    <a className="dropdown-item" href="#">Something else here</a>
-                  </li>
+                <ul className={"dropdown-menu dropdown-menu-" + theme} > 
+                  <li><a className="dropdown-item" href='/profile' aria-current="page">Edit Profile</a></li>
+                  <li className="dropdown-item" onClick={handleLogout}>Logout</li> 
                 </ul>
-              </li>
-              {user ? <li className="nav-item">
-                <a className="nav-link" href='/login' onClick={handleLogout}>Logout</a>
               </li> : null}
             </ul>
             {/* <form className="d-flex" role="search">

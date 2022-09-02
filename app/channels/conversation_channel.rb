@@ -8,17 +8,18 @@ class ConversationChannel < ApplicationCable::Channel
   def convo_load
     convo = Conversation.find(params['data'])
     ActionCable.server.broadcast(build_channel(convo.id), serialize_messages(convo.messages))
+    convo.notifications.where(user: current_user).destroy_all
   end
 
   def recieve_message(data)
     convo = Conversation.find(params['data'])
     Message.create!(user: current_user, conversation: convo, content: data["content"])
-    ActionCable.server.broadcast(build_channel(convo.id), serialize_messages(convo.messages))
+    NotifyAllJob.perform_later(convo,current_user)
+    convo_load
   end
 
   def unsubscribed
-    # Any cleanup needed when channel is unsubscribed
-    ActionCable.server.broadcast(build_channel(convo.id), {message: "disconnected"})
+    ActionCable.server.broadcast(build_channel(params['data'].to_i), {message: "disconnected"})
     stop_all_streams
   end
 

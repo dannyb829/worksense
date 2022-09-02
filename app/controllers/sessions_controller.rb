@@ -12,7 +12,7 @@ class SessionsController < ApplicationController
     end
 
     def destroy 
-        reset_session
+        session.delete(:user_id)
         @user = nil
         head :ok
     end

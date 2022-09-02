@@ -5,7 +5,7 @@ import {toast} from 'react-toastify'
 
 export default function LoginForm({setIsNewUser}) {
   const {user, setUser} = useContext(userContext)
-  const {isDark, setIsDark} = useContext(ThemeContext)
+  const isDark = useContext(ThemeContext)
 
   const [credentials ,setCredentials] = useState({username:"",password:""}) 
   const {username , password} = credentials
@@ -29,7 +29,7 @@ export default function LoginForm({setIsNewUser}) {
   <div className="container py-5 h-100" >
     <div className="row d-flex justify-content-center align-items-center h-100 overflow-scroll">
       <div className="col-12 col-md-8 col-lg-6 col-xl-5">
-        <div className={"card " + (isDark ? "text-white bg-dark" : "")} style={{border: 0}}>
+        <div className={"card " + (isDark.current === 'true' ? "text-white bg-dark" : "")} style={{border: 0}}>
           <div className="card-body p-5 text-center">
             <h3 className="mb-5">Log in</h3>
             <div className="form-outline mb-4">

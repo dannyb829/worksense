@@ -8,7 +8,7 @@ import RegisterForm from "../ELEMENTS/RegisterForm"
 export default function Login(){
     const [isNewUser ,setIsNewUser] = useState(false) 
     const {user} = useContext(userContext)
-    const {isDark} = useContext(ThemeContext)
+    const isDark = useContext(ThemeContext)
     const navigate = useNavigate()
 
     useEffect(()=>{
@@ -17,7 +17,7 @@ export default function Login(){
 
 
     if (!user) return (
-        <div className={'row ' + (isDark ? "bg-dark":"")} >
+        <div className={'row ' + (isDark.current === 'true' ? "bg-dark":"")} >
             {isNewUser ? <RegisterForm setIsNewUser={setIsNewUser}/> : <LoginForm setIsNewUser={setIsNewUser}/>}
         </div>
     )

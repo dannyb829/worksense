@@ -18,7 +18,6 @@ function App() {
   const [user ,setUser] = useState(null) 
   const isDark = useRef(localStorage.getItem('darkmode')) 
   const [conversations ,setConversations] = useState([]) 
-  const {id} = useParams()
   const navigate = useNavigate()
   
 
@@ -30,10 +29,15 @@ function App() {
 
 
 
-  function conversationLoad() {
+  function conversationLoad(readAll = false, convoId = null) {
+        if (readAll) removeNotifications(convoId)
         fetch('/conversations')
         .then(resp => resp.json())
         .then(setConversations)
+  }
+
+  function removeNotifications(convoId){
+    fetch(`/notifications/${convoId}`)
   }
   
   return (

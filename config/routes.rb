@@ -2,6 +2,7 @@ Rails.application.routes.draw do
   mount ActionCable.server => '/cable'
   resources :messages
   resources :conversations
+  resources :notifications, only: :show
 
   post '/login', to: "sessions#create"
   get '/logout', to: "sessions#destroy"

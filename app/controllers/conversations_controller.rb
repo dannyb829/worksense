@@ -1,7 +1,7 @@
 class ConversationsController < ApplicationController
 
     def index
-        render json: Conversation.limit(10)
+        render json: ActiveModel::Serializer::CollectionSerializer.new(Conversation.all, serializer: ConversationSerializer, scope: @user)
     end
 
     def show

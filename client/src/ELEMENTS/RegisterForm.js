@@ -7,7 +7,7 @@ import { useNavigate } from "react-router-dom";
 
 export default function RegisterForm({setIsNewUser}) {
   const [newUser ,setNewUser] = useState({username:"",password:"",password_confirmation:""}) 
-  const {isDark, setIsDark} = useContext(ThemeContext)
+  const isDark = useContext(ThemeContext)
 
 
 
@@ -40,7 +40,7 @@ export default function RegisterForm({setIsNewUser}) {
         <div className="container py-5 h-100">
     <div className="row d-flex justify-content-center align-items-center h-100 overflow-scroll">
       <div className="col-12 col-md-8 col-lg-6 col-xl-5">
-        <div className={"card shadow-2-strong " + (isDark ? "text-white bg-dark" : "")} style={{border:0}}>
+        <div className={"card shadow-2-strong " + (isDark.current === 'true' ? "text-white bg-dark" : "")} style={{border:0}}>
           <div className="card-body p-5 text-center">
 
             <h3 className="mb-5">Sign up</h3>
