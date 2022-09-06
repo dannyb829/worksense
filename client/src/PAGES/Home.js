@@ -4,18 +4,14 @@ import ThemeContext from "../CONTEXT/ThemeContext"
 import userContext from "../CONTEXT/userContext"
 import ConvoCard from "../ELEMENTS/ConvoCard"
 
-export default function Home({ convoState }) {
+export default function Home({ conversations }) {
     const { user } = useContext(userContext)
-    const { conversations, conversationLoad } = convoState
     const isDark = useContext(ThemeContext)
 
-    useEffect(() => {
-        conversationLoad()
-    }, [user])
     
     const displayConvos = user ? conversations?.map((convo) => <ConvoCard key={convo.id} convo={convo} />) : null
 
-console.log(conversations)
+
 
 
     return (

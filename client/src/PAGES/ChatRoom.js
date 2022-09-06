@@ -12,11 +12,10 @@ import { SocketContext } from "../index.js"
 
 
 
-const ChatRoom = ({ convoState }) => {
+const ChatRoom = ({ conversations }) => {
     //STATE
     const [messages, setMessages] = useState([])
     const [channel, setChannel] = useState(null)
-    const { conversations, conversationLoad } = convoState
     //CONTEXT
     const chatSocket = useContext(SocketContext)
     const isDark = useContext(ThemeContext)
@@ -27,8 +26,8 @@ const ChatRoom = ({ convoState }) => {
     const { id } = useParams()
 
     useEffect(() => {
-        // loads conversations and removes notifications on open chat
-        conversationLoad(true, parseInt(id))
+        // removes notifications on open chat
+        removeNotifications(parseInt(id))
         // create subscription on already instantiated websocket (index.js)
         const channel = chatSocket.subscriptions.create({
             channel: 'MessagesChannel',
@@ -39,7 +38,7 @@ const ChatRoom = ({ convoState }) => {
                 connected(e) { channel.send({ action: 'messages_load' }) },
                 disconnected() { console.log('disconnected') },
                 // reloads messages
-                received(e) { if (!e?.message) setMessages(e) }
+                received(e) { if (!e?.message) setMessages(e); removeNotifications(parseInt(id)) }
             }
 
         )
@@ -55,7 +54,10 @@ const ChatRoom = ({ convoState }) => {
         scrollPoint.current?.scrollIntoView({ behavior: 'smooth' })
     }, [messages])
 
-
+    function removeNotifications(convoId){
+        // deletes all notifications based on specific user and specific chat
+        fetch(`/notifications/${convoId}`)
+    }
 
 
     const displayMessages = messages?.map((message, i) => {

@@ -21,18 +21,21 @@ export default function RegisterForm({setIsNewUser}) {
   const confirmationErrors = errors.confirmation.map((error, i) => <Validation key={i} valid={false} message={error} register={true} />)
 
   useEffect(()=>{
-    //sets and resets username errors on effect
-    userNameValidate()
+    //sets and resets username errors on effect, 1 second delay
+    const timeOut = setTimeout(()=>{userNameValidate()},1000) 
+    return ()=>{clearTimeout(timeOut)}
   },[username])
   
   useEffect(()=>{
-    //sets and resets password errors on effect
-    passwordValidation()
+    //sets and resets password errors on effect, 1 second delay
+    const timeOut = setTimeout(()=>{passwordValidation()},1000) 
+    return ()=>{clearTimeout(timeOut)}
   },[password])
   
   useEffect(()=>{
-    //sets and resets password_confirmation errors on effect
-    confirmationValidation()
+    //sets and resets password_confirmation errors on effect, 1 second delay
+    const timeOut = setTimeout(()=>{confirmationValidation()},1000) 
+    return ()=>{clearTimeout(timeOut)}
   },[password_confirmation])
 
 

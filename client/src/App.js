@@ -1,4 +1,3 @@
-import logo from './logo.svg';
 import { useEffect, useState, useRef, useContext } from 'react';
 import './App.css';
 import Home from './PAGES/Home';
@@ -11,54 +10,65 @@ import ThemeContext from './CONTEXT/ThemeContext';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import EditProfile from './PAGES/EditProfile';
+import { SocketContext } from '.';
+
 
 
 
 function App() {
   //STATE
-  const [user ,setUser] = useState(null) 
-  const [conversations ,setConversations] = useState([]) 
+  const [user, setUser] = useState(null)
+  const [conversations, setConversations] = useState([])
   //REF
-  const isDark = useRef(localStorage.getItem('darkmode')) 
+  const isDark = useRef(localStorage.getItem('darkmode'))
   //NAVIGATE
   const navigate = useNavigate()
-  
+  //CONTEXT
+  const messageBoardSocket = useContext(SocketContext)
+  const [boardChannel, setBoardChannel] = useState(null)
 
-  useEffect(()=>{
+
+  useEffect(() => {
     // runs authorization on each rerender, if user not logged in then redirects to login
     fetch('/auth')
-    .then(resp => resp.ok ? resp.json() 
-    .then(data => setUser(data)) : navigate('/login'))
-  },[])
+      .then(resp => resp.ok ? resp.json()
+        .then(data => setUser(data)) : navigate('/login'))
+  }, [])
+
+  useEffect(() => {
+
+    const messageBoardChannel = messageBoardSocket.subscriptions.create(
+      { channel: 'ConversationsChannel' },
+      {
+        // loads messages in conversation upon subscription
+        connected(e) { console.log(e) },
+        disconnected() { console.log('disconnected') },
+        // reloads messages
+        received(e) { setConversations(e); console.log('mess', e) }
+      }
+    )
+    setBoardChannel(messageBoardChannel)
+    return () => {
+      if (boardChannel) boardChannel.unsubscribe()
+    }
+
+  }, [messageBoardSocket.subscriptions])
 
 
-
-  function conversationLoad(readAll = false, convoId = null) {
-    // if conversations are loaded into chatroom sidebar then remove notifications from specific opened chat
-        if (readAll) removeNotifications(convoId)
-        fetch('/conversations')
-        .then(resp => resp.ok ? resp.json().then(setConversations) : null)
-  }
-
-  function removeNotifications(convoId){
-    // deletes all notifications based on specific user and specific chat
-    fetch(`/notifications/${convoId}`)
-  }
-  
   return (
     <>
-    <ThemeContext.Provider value={isDark}>
-    <userContext.Provider value={{user, setUser}}>
-    <NavBar/>
-    <Routes>
-      <Route path='/' element={<Home convoState={{conversations, conversationLoad}}/>} />
-      <Route path='/login' element={<Login/>} />
-      <Route path='/profile' element={<EditProfile/>} />
-      <Route path='/chatroom/:id' element={<ChatRoom convoState={{conversations, conversationLoad}}/>} />
-    </Routes>
-    <ToastContainer position="bottom-right" theme={isDark.current === 'true' ? 'dark' : 'light'} />
-    </userContext.Provider>
-    </ThemeContext.Provider>
+      <ThemeContext.Provider value={isDark}>
+        <userContext.Provider value={{ user, setUser }}>
+          <NavBar />
+          <Routes>
+            <Route path='/' element={<Home conversations={conversations} />} />
+            <Route path='/login' element={<Login />} />
+            <Route path='/profile' element={<EditProfile />} />
+            <Route path='/chatroom/:id' element={<ChatRoom conversations={conversations} />} />
+          </Routes>
+          <ToastContainer position="bottom-right" theme={isDark.current === 'true' ? 'dark' : 'light'} />
+        </userContext.Provider>
+      </ThemeContext.Provider>
     </>
   )
 }

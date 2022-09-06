@@ -15,6 +15,7 @@ class MessagesChannel < ApplicationCable::Channel
     convo = Conversation.find(params['data'])
     Message.create!(user: current_user, conversation: convo, content: data["content"])
     NotifyAllJob.perform_later(convo,current_user)
+    UpdateConversationsJob.perform_later(current_user)
     messages_load
   end
 

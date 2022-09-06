@@ -5,6 +5,8 @@ Rails.application.routes.draw do
   resources :notifications, only: :show
   resources :users, only: :update
 
+  get '/convo/notifications/:convo_id', to: 'notifications#load_notifications'
+
   post '/login', to: "sessions#create"
   get '/logout', to: "sessions#destroy"
   get '/auth', to: "users#show"

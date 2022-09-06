@@ -38,9 +38,12 @@ export default function EditProfile() {
     },[image,user])
 
     useEffect(()=>{
-    //sets and resets errors on effect
+    //sets and resets username errors on effect, 1 second delay
         if(showEdit) {setErrors([]); setUsername('')}
-        if (username.length > 0 && user.username !== username) userNameValidate()
+        if (username.length > 0 && user.username !== username){ 
+            const timeOut = setTimeout(userNameValidate,1000)
+            return () => { clearTimeout(timeOut)}
+        }
     },[username, showEdit])
     
     function submitChanges(link='') {
