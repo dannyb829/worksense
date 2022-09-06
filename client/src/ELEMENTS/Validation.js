@@ -1,12 +1,12 @@
 
 
 
-export default function Validation({valid, message}) {
+export default function Validation({valid, message, register = false}) {
 
     return (
         <>
-        <br></br>
-        <div className={"validation text-" + (!valid ? "danger" : "success")} style={{}}>
+        {register ? null : <br></br>}
+        <div className={"validation" + (register ? "-register" : "") + " text-" + (!valid ? "danger" : "success")} >
             {message}
         </div>
         </>

@@ -1,16 +1,16 @@
 class UsersController < ApplicationController
-    skip_before_action :authorize, only: :create
+    skip_before_action :authorize, only: [:create, :name_available?]
 
     def show
-        if params[:username]
-            used = User.find_by_username(params[:username])
-            if !used
-                render json: {}, status: 200
-            else 
-                render json: {}, status: 422
-            end
-        else
-            render json: @user
+        render json: @user
+    end
+
+    def name_available?
+        used = User.find_by_username(params[:username])
+        if !used
+            render json: {}, status: 200
+        else 
+            render json: {}, status: 422
         end
     end
 
@@ -27,6 +27,6 @@ class UsersController < ApplicationController
     private
 
     def user_params
-        params.require(:user).permit(:id,:username,:image_url, :password, :password_confirmation)
+        params.permit(:id,:username,:image_url, :password, :password_confirmation)
     end
 end

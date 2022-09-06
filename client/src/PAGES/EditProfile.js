@@ -20,11 +20,11 @@ export default function EditProfile() {
     const [errors ,setErrors] = useState([]) 
     //IMAGE INPUT REF
     const imageSet = useRef()
-
-
+    //error display
     const displayErrors = errors?.map((error, i) => <Validation key={i} valid={false} message={error} />)
 
     useEffect(()=>{
+    //sets preview for whe image is selected befor upload using file reader
         if (image) {
             const reader = new FileReader()
             reader.onload = () => {
@@ -38,11 +38,13 @@ export default function EditProfile() {
     },[image,user])
 
     useEffect(()=>{
+    //sets and resets errors on effect
         if(showEdit) {setErrors([]); setUsername('')}
         if (username.length > 0 && user.username !== username) userNameValidate()
     },[username, showEdit])
     
     function submitChanges(link='') {
+    //user update request, toast completion or error
         fetch(`users/${user.id}`,{
             method:'PATCH',
             headers:{'Content-Type':'application/json'},
@@ -61,48 +63,55 @@ export default function EditProfile() {
     }
 
     function faceDetectTransorm(link) {
-        return [link.split('upload/')[0], "upload/c_thumb,g_faces,h_300,w_400/", link.split('upload/')[1]].join('')
+        //uses cloudinary face detection transformation to ensure faces are centered upon submitting image_url
+        return [link.split('upload/')[0], "upload/c_thumb,g_faces,h_400,w_400/", link.split('upload/')[1]].join('')
     }
 
-    async function handleProfileUpdate() {
+    function handleProfileUpdate() {
+        //click to commit changes
         if (image){
         const formData = new FormData()
+
         formData.append('file', image)
         formData.append("upload_preset", "equlchhq")
 
-        await axios.post("https://api.cloudinary.com/v1_1/unifyed-media/image/upload", formData)
+        axios.post("https://api.cloudinary.com/v1_1/unifyed-media/image/upload", formData)
         .then(image => submitChanges(faceDetectTransorm(image.data.secure_url)))
         }
         else submitChanges()
     }
 
     function handleImageSelect({target: {files}}) {
+        //image upload onchange
         setImage(files[0])
     }
 
     function toggleEditUserName() {
+        //show or hide edit username
         setShowEdit(prev => !prev)
         setErrors([])
     }
 
     function handleUserNameChange({target: {name, value}}) {
-        console.log('checkkk')
+        //form control for username edit
         setUsername(value)
     }
     
     function displayedImageUrl(){
+        //sets image to be displayed from user / preview / or placeholder if none
         if (!preview) return user?.image_url || "https://st4.depositphotos.com/4329009/19956/v/600/depositphotos_199564354-stock-illustration-creative-vector-illustration-default-avatar.jpg"
         else return preview
     }
 
     function imgInputClick() {
+        //Ref click on image to image input tag
         imageSet.current.click()
     }
 
     function userNameValidate() {
+        //request to backend to check if username is available then runs front end validation
         checkUserNameAvailable()
         if (username.length < 5){
-            console.log('check',errors.find(error => error === 'username too short'))
             if (!errors.find(error => error === 'username too short')) setErrors(prev => [...prev,'username too short'])
         }
         else{
@@ -111,6 +120,7 @@ export default function EditProfile() {
     }
 
     function checkUserNameAvailable() {
+        //back end username availablilty request
         fetch('/username',{
             method: 'POST',
             headers:{'Content-Type':'application/json'},

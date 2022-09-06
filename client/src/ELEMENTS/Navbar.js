@@ -62,7 +62,7 @@ export default function NavBar(){
               </li>
               {user ? <li className="nav-item dropdown">
                 <a
-                  className="nav-link dropdown-toggle"
+                  className="nav-link dropdown-toggle active"
                   href="#"
                   role="button"
                   data-bs-toggle="dropdown"
@@ -72,21 +72,10 @@ export default function NavBar(){
                 </a>
                 <ul className={"dropdown-menu dropdown-menu-" + theme} > 
                   <li><a className="dropdown-item" href='/profile' aria-current="page">Edit Profile</a></li>
-                  <li className="dropdown-item" onClick={handleLogout}>Logout</li> 
+                  <li><a className="dropdown-item" href='#' data-bs-dismiss="offcanvas" onClick={handleLogout}>Logout</a></li> 
                 </ul>
               </li> : null}
             </ul>
-            {/* <form className="d-flex" role="search">
-              <input
-                className="form-control me-2"
-                type="search"
-                placeholder="Search"
-                aria-label="Search"
-              />
-              <button className="btn btn-outline-success" type="submit">
-                Search
-              </button>
-            </form> */}
           </div>
         </div>
       </div>

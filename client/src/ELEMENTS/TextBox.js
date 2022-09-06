@@ -20,8 +20,7 @@ export default function TextBox({chatSocket}){
     }
 
     return (
-    <div className="flex-grow-0 py-3 px-4" data-tip="new messages" >
-    <ReactTooltip place="top" type="info" effect="solid"/>
+    <div className="flex-grow-0 py-3 px-4" >
         <div className="input-group mb-1" >
             <input type="text" className="form-control " placeholder="Type your message" value={content} onChange={e =>setContent(e.target.value)} />
             <button className="btn btn-primary" onClick={submitMessage}>Send</button>

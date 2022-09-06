@@ -1,5 +1,5 @@
-import { createRef, useContext, useEffect, useRef, useState } from "react"
-import { useNavigate, useParams } from "react-router-dom"
+import { useContext, useEffect, useRef, useState } from "react"
+import { useParams } from "react-router-dom"
 import ThemeContext from "../CONTEXT/ThemeContext"
 import userContext from "../CONTEXT/userContext"
 import ConvoCard from "../ELEMENTS/ConvoCard"
@@ -13,32 +13,38 @@ import { SocketContext } from "../index.js"
 
 
 const ChatRoom = ({ convoState }) => {
+    //STATE
     const [messages, setMessages] = useState([])
-    const { conversations, conversationLoad } = convoState
     const [channel, setChannel] = useState(null)
-    const { id } = useParams()
+    const { conversations, conversationLoad } = convoState
+    //CONTEXT
     const chatSocket = useContext(SocketContext)
     const isDark = useContext(ThemeContext)
     const { user } = useContext(userContext)
-    const navigate = useNavigate()
+    //REF
     const scrollPoint = useRef(null)
+    //PARAMS
+    const { id } = useParams()
 
     useEffect(() => {
         // loads conversations and removes notifications on open chat
         conversationLoad(true, parseInt(id))
+        // create subscription on already instantiated websocket (index.js)
         const channel = chatSocket.subscriptions.create({
-            channel: 'ConversationChannel',
+            channel: 'MessagesChannel',
             data: id
         },
             {
                 // loads messages in conversation upon subscription
-                connected(e) { channel.send({ action: 'convo_load' }) },
+                connected(e) { channel.send({ action: 'messages_load' }) },
                 disconnected() { console.log('disconnected') },
+                // reloads messages
                 received(e) { if (!e?.message) setMessages(e) }
             }
 
         )
         setChannel(channel)
+        //cleanup to ensure no redundant subscriptions
         return () => {
             channel.unsubscribe()
         }
@@ -67,12 +73,12 @@ const ChatRoom = ({ convoState }) => {
                         {conversationList}
                     </div>
                 </div>
-                <div className='col-sm-9 c-pad scrn-height overflow-scroll'>
+                <div className='col-md-9 c-pad scrn-height overflow-scroll'>
                     {displayMessages}
                     <div ref={scrollPoint}></div>
                 </div>
-                <div className='col-sm-3' ></div>
-                <div className={'col-sm-9 chat-input ' + (isDark.current === 'true' ? "bg-dark" : "bg-light")} >
+                <div className='col-sm-3 d-none d-md-block' ></div>
+                <div className={'col-md-9 chat-input ' + (isDark.current === 'true' ? "bg-dark" : "bg-light")} >
                     <TextBox chatSocket={channel} />
                 </div>
             </div>

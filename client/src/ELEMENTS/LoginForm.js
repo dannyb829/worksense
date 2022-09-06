@@ -1,14 +1,17 @@
-import { useState, useContext } from "react"
+import { useState, useContext, useEffect } from "react"
 import ThemeContext from "../CONTEXT/ThemeContext"
 import userContext from "../CONTEXT/userContext"
 import { toast } from 'react-toastify'
+import Validation from "./Validation"
 
 export default function LoginForm({ setIsNewUser }) {
+  //CONTEXT
   const { user, setUser } = useContext(userContext)
   const isDark = useContext(ThemeContext)
-
+  //STATE
   const [credentials, setCredentials] = useState({ username: "", password: "" })
   const { username, password } = credentials
+  
 
   function handleLogin() {
     fetch('/login', {
@@ -16,12 +19,14 @@ export default function LoginForm({ setIsNewUser }) {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(credentials)
     })
+      //VALID LOGIN ? IF NOT TOAST ERROR
       .then(resp => resp.ok ? resp.json().then(data => setUser(data)) :
         resp.json().then(data => toast(data.error, { type: 'error' }))
       )
   }
 
   function handleCredentials({ target: { name, value } }) {
+    //FORM CONTROL
     setCredentials(prev => ({ ...prev, [name]: value }))
   }
 

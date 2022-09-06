@@ -15,9 +15,12 @@ import EditProfile from './PAGES/EditProfile';
 
 
 function App() {
+  //STATE
   const [user ,setUser] = useState(null) 
-  const isDark = useRef(localStorage.getItem('darkmode')) 
   const [conversations ,setConversations] = useState([]) 
+  //REF
+  const isDark = useRef(localStorage.getItem('darkmode')) 
+  //NAVIGATE
   const navigate = useNavigate()
   
 
