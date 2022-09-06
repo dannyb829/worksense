@@ -8,14 +8,14 @@ export default function Home({ convoState }) {
     const { user } = useContext(userContext)
     const { conversations, conversationLoad } = convoState
     const isDark = useContext(ThemeContext)
-    const navigate = useNavigate()
 
     useEffect(() => {
         conversationLoad()
-    }, [])
+    }, [user])
+    
+    const displayConvos = user ? conversations?.map((convo) => <ConvoCard key={convo.id} convo={convo} />) : null
 
 console.log(conversations)
-    const displayConvos = conversations?.map((convo) => <ConvoCard key={convo.id} convo={convo} />)
 
 
     return (

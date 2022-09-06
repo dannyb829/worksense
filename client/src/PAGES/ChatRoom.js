@@ -24,12 +24,14 @@ const ChatRoom = ({ convoState }) => {
     const scrollPoint = useRef(null)
 
     useEffect(() => {
+        // loads conversations and removes notifications on open chat
         conversationLoad(true, parseInt(id))
         const channel = chatSocket.subscriptions.create({
             channel: 'ConversationChannel',
             data: id
         },
             {
+                // loads messages in conversation upon subscription
                 connected(e) { channel.send({ action: 'convo_load' }) },
                 disconnected() { console.log('disconnected') },
                 received(e) { if (!e?.message) setMessages(e) }
@@ -41,14 +43,14 @@ const ChatRoom = ({ convoState }) => {
             channel.unsubscribe()
         }
     }, [id, chatSocket.subscriptions])
-    
-    useEffect(()=>{
-        scrollDownMessages()
-    },[messages])
 
-    function scrollDownMessages() {
-        scrollPoint.current?.scrollIntoView({behavior:'smooth'})
-    }
+    useEffect(() => {
+        //scrolls to last message on chat load
+        scrollPoint.current?.scrollIntoView({ behavior: 'smooth' })
+    }, [messages])
+
+
+
 
     const displayMessages = messages?.map((message, i) => {
         if (message.user?.id === user?.id) return <UserBubble key={message.id} message={message} isLast={i === messages.length - 1 ? true : false} />
@@ -61,7 +63,7 @@ const ChatRoom = ({ convoState }) => {
             <div className={"row no-gutters" + (isDark.current === 'true' ? " bg-dark" : "")} >
                 <div className='col-sm-3 p-0 d-none d-md-block scrn-height overflow-scroll b-border-right'>
                     <div className="list-group rounded-0">
-                        <li className={"list-group-item px-4 rounded-0 border-end-0 text-muted " + (isDark.current === 'true' ? " bg-dark" : "")}><h6 className="px-1">SUBJECTS</h6></li>
+                        <li className={"list-group-item px-4 rounded-0 border-end-0 text-muted " + (isDark.current === 'true' ? " bg-dark" : "")}><h6 className="px-1">MESSAGE BOARD</h6></li>
                         {conversationList}
                     </div>
                 </div>

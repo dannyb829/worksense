@@ -22,6 +22,7 @@ function App() {
   
 
   useEffect(()=>{
+    // runs authorization on each rerender, if user not logged in then redirects to login
     fetch('/auth')
     .then(resp => resp.ok ? resp.json() 
     .then(data => setUser(data)) : navigate('/login'))
@@ -30,13 +31,14 @@ function App() {
 
 
   function conversationLoad(readAll = false, convoId = null) {
+    // if conversations are loaded into chatroom sidebar then remove notifications from specific opened chat
         if (readAll) removeNotifications(convoId)
         fetch('/conversations')
-        .then(resp => resp.json())
-        .then(setConversations)
+        .then(resp => resp.ok ? resp.json().then(setConversations) : null)
   }
 
   function removeNotifications(convoId){
+    // deletes all notifications based on specific user and specific chat
     fetch(`/notifications/${convoId}`)
   }
   

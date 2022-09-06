@@ -8,6 +8,7 @@ import actioncable from 'actioncable'
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
+// websocket held in root of app so as not to re initiate WS connection on any rerenders
 
 const chatSocket = {}
 chatSocket.cable = actioncable.createConsumer('ws://localhost:3000/cable')
@@ -15,11 +16,11 @@ export const SocketContext = createContext()
 
 root.render(
   <React.StrictMode>
-  <BrowserRouter>
-  <SocketContext.Provider value={chatSocket.cable} >
-    <App />
-  </SocketContext.Provider>
-  </BrowserRouter>
+    <BrowserRouter>
+      <SocketContext.Provider value={chatSocket.cable} >
+        <App />
+      </SocketContext.Provider>
+    </BrowserRouter>
   </React.StrictMode>
 );
 
