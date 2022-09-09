@@ -1,13 +1,13 @@
 {
-  "name": "worksense",
-  "description": "build scripts for heroku",
+  "name": "phase-4-deploying-app-demo",
+  "description": "Build scripts for Heroku",
   "engines": {
-    "node": ">= 14"
+    "node": "16.x"
   },
-  "scripts":{
+  "scripts": {
     "clean": "rm -rf public",
     "build": "npm install --prefix client && npm run build --prefix client",
-    "deploy": "cp -a client/build. /public",
+    "deploy": "cp -a client/build/. public/",
     "heroku-postbuild": "npm run clean && npm run build && npm run deploy"
   }
 }
