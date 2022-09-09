@@ -76,7 +76,7 @@ const ChatRoom = ({ conversations }) => {
                     </div>
                 </div>
                 <div className='col-md-9 c-pad scrn-height overflow-scroll'>
-                    {displayMessages}
+                    {displayMessages.length ? displayMessages : <h1 className={"m-1 opacity-25 " + (isDark.current === 'true' ? "text-white" : "")}>be the first to chat!</h1>}
                     <div ref={scrollPoint}></div>
                 </div>
                 <div className='col-sm-3 d-none d-md-block' ></div>

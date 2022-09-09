@@ -9,7 +9,7 @@ class UpdateConversationsJob < ApplicationJob
   private 
 
   def serialize_conversations(user)
-    ActiveModel::Serializer::CollectionSerializer.new(Conversation.all, serializer: ConversationSerializer, scope: user)
+    ActiveModel::Serializer::CollectionSerializer.new(Conversation.order('created_at DESC'), serializer: ConversationSerializer, scope: user)
   end
 
 end

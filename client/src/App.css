@@ -103,6 +103,15 @@ nav {
   background-color: #8723eb;
 }
 
+.cust-button{
+background-color: #8723eb;
+color: white;
+}
+
+.cust-button:hover{
+background-color: #DA70D6;
+}
+
 .shadowed{
   box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
 }
@@ -183,4 +192,49 @@ a {
   opacity: .5;
 }
 
+.profile-picture{
+  width: 23rem; 
+  height:23rem;
+  object-fit:cover
+}
 
+.profile-picture:hover{
+  opacity: .5;
+}
+
+.bg-white{
+  background-color: white;
+}
+
+.accordion-button{
+  font-size: inherit;
+}
+
+.accordion-button:not(.collapsed)::after{
+  filter: brightness(0%) invert(100%)
+}
+
+.accordion-button:not(.show)::backdrop{
+  filter: brightness(0%) invert(100%)
+}
+
+.accordion-button:focus{
+  box-shadow: rgba(135, 35, 235, .35) 0px 5px 15px;
+  z-index: inherit;
+}
+
+.accordion-button:hover{
+  box-shadow:inset rgba(135, 35, 235, .35) 0px 5px 25px;
+  z-index: inherit;
+}
+.accordion-button{
+  padding-left: 2rem;
+}
+
+.accordion-header{
+  border: .01mm solid #202020
+}
+
+label{
+  color:black
+}

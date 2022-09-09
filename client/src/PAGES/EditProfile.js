@@ -6,6 +6,8 @@ import {PencilIcon} from '@primer/octicons-react'
 import axios from 'axios'
 import Validation from "../ELEMENTS/Validation"
 import { toast } from 'react-toastify'
+import Tippy from '@tippyjs/react'
+import 'tippy.js/dist/tippy.css'
 
 export default function EditProfile() {
 
@@ -38,10 +40,10 @@ export default function EditProfile() {
     },[image,user])
 
     useEffect(()=>{
-    //sets and resets username errors on effect, 1 second delay
+    //sets and resets username errors on effect, .5 second delay
         if(showEdit) {setErrors([]); setUsername('')}
         if (username.length > 0 && user.username !== username){ 
-            const timeOut = setTimeout(userNameValidate,1000)
+            const timeOut = setTimeout(userNameValidate,500)
             return () => { clearTimeout(timeOut)}
         }
     },[username, showEdit])
@@ -135,21 +137,27 @@ export default function EditProfile() {
 
     if (user) return (
         <div className={"row no-gutters justify-content-center " + (isDark.current === 'true' ? "bg-dark" : "")}>
-            <div className={"col-sm-3 d-none d-md-block " + (isDark.current === 'true' ? "bg-dark" : "")}></div>
-            <div className={"col-sm-6 justify-content-center align-items-center text-center " + (isDark.current === 'true' ? "bg-dark text-white" : "")}>
-                <img onClick={imgInputClick} role="button" src={displayedImageUrl()} className="rounded-circle img-fluid m-5 mx-auto border border-5 d-block" alt="profile picture" style={{width:'23rem', height:'23rem', objectFit:'cover'}} data-bs-toggle="tooltip" data-bs-title="Default tooltip"></img>
+            <div className={"col-md-3 d-none d-md-block " + (isDark.current === 'true' ? "bg-dark" : "")}></div>
+            <div className={"col-md-6 justify-content-center align-items-center text-center " + (isDark.current === 'true' ? "bg-dark text-white" : "")}>
+                <Tippy content={<b>click to change image</b>} placement="bottom" >
+
+                <img onClick={imgInputClick} role="button" src={displayedImageUrl()} className="rounded-circle img-fluid m-5 mx-auto border border-5 d-block profile-picture" alt="profile picture" data-tip="React-tooltip"></img>
+                </Tippy>
+
                 <input ref={imageSet} className='d-none' accept="image/*" type="file" name='image_url' onChange={handleImageSelect}></input>
                 <div style={{marginLeft:'1.5rem'}}>
                 {showEdit ? <h3 className="p-3 d-inline"><span className="badge bg-secondary">{user?.username}</span></h3> :
                 <input value={username} name='username' onChange={handleUserNameChange} className={"form-control w-25 mx-auto d-inline is-" + (errors.length > 0 ?"invalid" : "valid")} autoComplete='off' placeholder={user?.username}></input>}
-                <div className="d-inline-block" role="button" onClick={toggleEditUserName} ><PencilIcon className="px-3" verticalAlign="middle" size={24} /></div>
+                <Tippy content={<b>click to change username</b>} placement="bottom" >
+                <div className="d-inline-block" role="button" onClick={toggleEditUserName} data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Default tooltip"><PencilIcon className="px-3" verticalAlign="middle" size={24} /></div>
+                </Tippy>
                 </div>
                 {!showEdit ? displayErrors : null}
                 <hr className="w-50 mx-auto mt-4"></hr>
                 <h4 className="p-3"><span className="badge bg-secondary">Member since {formatDistance(Date.parse(user?.created_at), new Date(),{ addSuffix: true })}</span></h4>
-                <button className="btn btn-primary purple-lm m-2" onClick={handleProfileUpdate}><b>update profile</b></button>
+                <button className="btn cust-button m-2" onClick={handleProfileUpdate}><b>update profile</b></button>
             </div>
-            <div className={"col-sm-3 d-none d-md-block " + (isDark.current === 'true' ? "bg-dark" : "")}></div>
+            <div className={"col-md-3 d-none d-md-block " + (isDark.current === 'true' ? "bg-dark" : "")}></div>
         </div>
     )
 }

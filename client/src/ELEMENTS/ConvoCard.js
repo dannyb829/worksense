@@ -6,9 +6,9 @@ export default function ConvoCard({ convo, mini, current = false }) {
     const isDark = useContext(ThemeContext)
     const [notifications ,setNotifications] = useState(0) 
     const { id, name, description, last_message } = convo
+console.log(last_message)
+    const last_updated = formatDistance(Date.parse(last_message ? last_message?.created_at : convo?.created_at), new Date(), { addSuffix: true })
 
-    const last_updated = last_message ? formatDistance(Date.parse(last_message?.created_at), new Date(), { addSuffix: true }) : new Date
-console.log('notifications',notifications)
     useEffect(()=>{
         fetch(`/convo/notifications/${convo.id}`)
         .then(resp => resp.json())

@@ -27,6 +27,9 @@ function App() {
   const messageBoardSocket = useContext(SocketContext)
   const [boardChannel, setBoardChannel] = useState(null)
 
+  useEffect(()=>{
+    document.body.style.background = isDark.current === 'true' ? '#212529' : '#FFF'
+  },[isDark.current])
 
   useEffect(() => {
     // runs authorization on each rerender, if user not logged in then redirects to login
@@ -47,9 +50,10 @@ function App() {
         received(e) { setConversations(e); console.log('mess', e) }
       }
     )
-    setBoardChannel(messageBoardChannel)
+    // setBoardChannel(messageBoardChannel)
     return () => {
-      if (boardChannel) boardChannel.unsubscribe()
+      // if (boardChannel) 
+      messageBoardChannel.unsubscribe()
     }
 
   }, [messageBoardSocket.subscriptions])

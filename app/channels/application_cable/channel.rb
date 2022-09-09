@@ -4,7 +4,7 @@ module ApplicationCable
     private
 
     def serialize_conversations
-        ActiveModel::Serializer::CollectionSerializer.new(Conversation.all, serializer: ConversationSerializer, scope: current_user)
+        ActiveModel::Serializer::CollectionSerializer.new(Conversation.order('created_at DESC'), serializer: ConversationSerializer, scope: current_user)
     end
     
   end
