@@ -1,5 +1,5 @@
 {
-  "name": "WorkSense",
+  "name": "worksense",
   "description": "build scripts for heroku",
   "engines": {
     "node": ">= 14"
