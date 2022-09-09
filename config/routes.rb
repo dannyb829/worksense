@@ -5,15 +5,19 @@ Rails.application.routes.draw do
   resources :notifications, only: :show
   resources :users, only: :update
 
+  #NOTIFICATIONS
   get '/convo/notifications/:convo_id', to: 'notifications#load_notifications'
 
+ #SESSION
   post '/signin', to: "sessions#create"
   get '/logout', to: "sessions#destroy"
+
+  #USER
   get '/auth', to: "users#show"
   post '/username', to: "users#name_available?"
   post '/signup', to: "users#create"
-  # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
-  # Defines the root path route ("/")
-  # root "articles#index"
+  # fallback for client side routing on react app
+  get '*path', to: "fallback#index", constraints: ->(req) { !req.xhr? && req.format.html? }
+
 end
