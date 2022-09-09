@@ -11,7 +11,7 @@ const root = ReactDOM.createRoot(document.getElementById('root'));
 // websocket held in root of app so as not to re initiate WS connection on any rerenders
 
 const chatSocket = {}
-chatSocket.cable = actioncable.createConsumer('ws://localhost:3000/cable')
+chatSocket.cable = actioncable.createConsumer('ws://worksense.herokuapp.com/cable')
 export const SocketContext = createContext()
 
 root.render(

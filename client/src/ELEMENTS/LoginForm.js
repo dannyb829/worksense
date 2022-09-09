@@ -14,7 +14,7 @@ export default function LoginForm({ setIsNewUser }) {
   
 
   function handleLogin() {
-    fetch('/login', {
+    fetch('/signin', {
       method: 'POST',
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(credentials)

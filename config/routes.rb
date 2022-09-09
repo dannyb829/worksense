@@ -7,7 +7,7 @@ Rails.application.routes.draw do
 
   get '/convo/notifications/:convo_id', to: 'notifications#load_notifications'
 
-  post '/login', to: "sessions#create"
+  post '/signin', to: "sessions#create"
   get '/logout', to: "sessions#destroy"
   get '/auth', to: "users#show"
   post '/username', to: "users#name_available?"
