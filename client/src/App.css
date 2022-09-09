@@ -226,10 +226,6 @@ a {
   border: .01mm solid #202020
 }
 
-label{
-  color:black
-}
-
 .emoji{
   color:transparent;
   text-shadow: 0 0 0 grey;

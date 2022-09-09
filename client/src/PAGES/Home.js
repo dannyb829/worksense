@@ -1,5 +1,4 @@
-import { useContext, useEffect, useState } from "react"
-import { useNavigate } from "react-router-dom"
+import { useContext } from "react"
 import ThemeContext from "../CONTEXT/ThemeContext"
 import userContext from "../CONTEXT/userContext"
 import ConvoCard from "../ELEMENTS/ConvoCard"

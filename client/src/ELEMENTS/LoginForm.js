@@ -1,12 +1,12 @@
-import { useState, useContext, useEffect } from "react"
+import { useState, useContext} from "react"
 import ThemeContext from "../CONTEXT/ThemeContext"
 import userContext from "../CONTEXT/userContext"
 import { toast } from 'react-toastify'
-import Validation from "./Validation"
+
 
 export default function LoginForm({ setIsNewUser }) {
   //CONTEXT
-  const { user, setUser } = useContext(userContext)
+  const { setUser } = useContext(userContext)
   const isDark = useContext(ThemeContext)
   //STATE
   const [credentials, setCredentials] = useState({ username: "", password: "" })

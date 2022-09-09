@@ -46,7 +46,7 @@ export default function ConversationForm() {
                                 onChange={handleFormChange}
                                 aria-label="Example text with button addon" 
                                 aria-describedby="button-addon1"></input>
-                                <label htmlFor='conversation-form' className="p-4">start a conversation, give it a title!</label>
+                                <label htmlFor='conversation-form' className="text-black p-4">start a conversation, give it a title!</label>
                             </div>
                             <div className="form-floating p-3">
                                 <textarea className="form-control" 
@@ -56,7 +56,7 @@ export default function ConversationForm() {
                                 value={description} 
                                 onChange={handleFormChange}
                                 style={{height: "100px"}}></textarea>
-                                <label htmlFor="floatingTextarea2" className="p-4">provide a short description</label>
+                                <label htmlFor="floatingTextarea2" className="text-black p-4">provide a short description</label>
                             </div>
                                 <button className="btn cust-button float-end mx-3" type="button" id="button-addon1" onClick={submitNewConversation} >Submit</button>
                         </div>
