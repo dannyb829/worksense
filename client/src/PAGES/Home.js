@@ -13,15 +13,15 @@ export default function Home({ conversations }) {
     const displayConvos = user ? conversations?.map((convo) => <ConvoCard key={convo.id} convo={convo} />) : null
 
 
-console.log(conversations)
+
 
     return (
         <div className={"row no-gutters overflow-scroll" + (isDark.current === 'true' ? " bg-dark" : "")}>
             <div className="col-md-2 d-none d-md-block"></div>
-            <div className={"col-md-8 px-0 overflow-scroll" + (isDark.current === 'true' ? " bg-dark" : "")} style={{ backgroundColor: (isDark ? "#282c34" : "#fff") }}>
+            <div className={"col-md-8 px-0 overflow-scroll" + (isDark.current === 'true' ? " bg-dark text-white" : "")} >
                 <div className='list-group rounded-0'>
             <ConversationForm/>
-                    {displayConvos}
+                    {displayConvos?.length ? displayConvos : <h1 className='m-4 p-2 emoji'>Get the conversation going, click above <span className='emoji'>🔝🔝🔝🔝🔝🔝</span></h1>}
                 </div>
             </div>
             <div className="col-md-2 d-none d-md-block"></div>

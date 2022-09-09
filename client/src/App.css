@@ -208,33 +208,29 @@ a {
 
 .accordion-button{
   font-size: inherit;
+  padding-left: 2rem;
+  box-shadow: rgba(135, 35, 235, .35) 0px 5px 15px;
 }
 
-.accordion-button:not(.collapsed)::after{
-  filter: brightness(0%) invert(100%)
-}
-
-.accordion-button:not(.show)::backdrop{
-  filter: brightness(0%) invert(100%)
-}
 
 .accordion-button:focus{
-  box-shadow: rgba(135, 35, 235, .35) 0px 5px 15px;
   z-index: inherit;
+  box-shadow: rgba(135, 35, 235, .35) 0px 5px 15px;
 }
 
 .accordion-button:hover{
   box-shadow:inset rgba(135, 35, 235, .35) 0px 5px 25px;
   z-index: inherit;
 }
-.accordion-button{
-  padding-left: 2rem;
-}
-
 .accordion-header{
   border: .01mm solid #202020
 }
 
 label{
   color:black
+}
+
+.emoji{
+  color:transparent;
+  text-shadow: 0 0 0 grey;
 }
