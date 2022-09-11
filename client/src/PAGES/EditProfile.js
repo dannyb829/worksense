@@ -50,21 +50,24 @@ export default function EditProfile() {
     
     function submitChanges(link='') {
     //user update request, toast completion or error
+    if (username && !errors.length) {
         fetch(`users/${user.id}`,{
             method:'PATCH',
             headers:{'Content-Type':'application/json'},
             body: JSON.stringify(link ? {username,image_url: link} : {username})})
-        .then(resp => {
-            if (resp.ok){
-                resp.json().then(user => setUser(user)) 
-                setShowEdit(true)
-                setImage(null)
-                setPreview('')
-                setUsername('')
-                toast('changes accepted!',{type:'success'})
+            .then(resp => {
+                if (resp.ok){
+                    resp.json().then(user => setUser(user)) 
+                    setShowEdit(true)
+                    setImage(null)
+                    setPreview('')
+                    setUsername('')
+                    toast('changes accepted!',{type:'success'})
+                }
+                else toast('something went wrong',{type:'error'})}
+                )
             }
-            else toast('something went wrong',{type:'error'})}
-        )
+            else toast('no changes made',{type:'warning'})
     }
 
     function faceDetectTransorm(link) {
