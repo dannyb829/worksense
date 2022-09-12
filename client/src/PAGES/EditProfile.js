@@ -50,11 +50,14 @@ export default function EditProfile() {
     
     function submitChanges(link='') {
     //user update request, toast completion or error
-    if (username && !errors.length) {
+    const imageUpdate = link && !username ? {image_url:link} : null
+    const userNameUpdate = username && !link ? {username} : null
+    const bothUpdate = username && link ? {username, image_url:link} : null
+
         fetch(`users/${user.id}`,{
             method:'PATCH',
             headers:{'Content-Type':'application/json'},
-            body: JSON.stringify(link ? {username,image_url: link} : {username})})
+            body: JSON.stringify(imageUpdate || userNameUpdate || bothUpdate)})
             .then(resp => {
                 if (resp.ok){
                     resp.json().then(user => setUser(user)) 
@@ -66,8 +69,6 @@ export default function EditProfile() {
                 }
                 else toast('something went wrong',{type:'error'})}
                 )
-            }
-            else toast('no changes made',{type:'warning'})
     }
 
     function faceDetectTransorm(link) {
