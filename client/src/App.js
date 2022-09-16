@@ -44,7 +44,7 @@ function App() {
       { channel: 'ConversationsChannel' },
       {
         // loads messages in conversation upon subscription
-        connected(e) { console.log(e) },
+        connected(e) { setBoardChannel(messageBoardChannel) },
         disconnected() { console.log('disconnected') },
         // reloads messages
         received(e) { setConversations(e); console.log('mess', e) }
@@ -53,7 +53,7 @@ function App() {
     // setBoardChannel(messageBoardChannel)
     return () => {
       // if (boardChannel) 
-      messageBoardChannel.unsubscribe()
+      boardChannel?.unsubscribe()
     }
 
   }, [messageBoardSocket.subscriptions])

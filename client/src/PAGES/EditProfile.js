@@ -151,7 +151,7 @@ export default function EditProfile() {
                 <input ref={imageSet} className='d-none' accept="image/*" type="file" name='image_url' onChange={handleImageSelect}></input>
                 <div style={{marginLeft:'1.5rem'}}>
                 {showEdit ? <h3 className="p-3 d-inline"><span className="badge bg-secondary">{user?.username}</span></h3> :
-                <input value={username} name='username' onChange={handleUserNameChange} className={"form-control w-25 mx-auto d-inline is-" + (errors.length > 0 ?"invalid" : "valid")} autoComplete='off' placeholder={user?.username}></input>}
+                <input value={username} name='username' onChange={handleUserNameChange} className={"form-control w-50 mx-auto d-inline is-" + (errors.length > 0 ?"invalid" : "valid")} autoComplete='off' placeholder={user?.username}></input>}
                 <Tippy content={<b>click to change username</b>} placement="bottom" >
                 <div className="d-inline-block" role="button" onClick={toggleEditUserName} data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Default tooltip"><PencilIcon className="px-3" verticalAlign="middle" size={24} /></div>
                 </Tippy>
