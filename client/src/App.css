@@ -226,8 +226,10 @@ a {
   border: .01mm solid #202020
 }
 
-.emoji{
+.no-content-msg{
   color:transparent;
+  animation: no-content-msg 2s;
+  animation-iteration-count: 1;
   text-shadow: 0 0 0 grey;
 }
 

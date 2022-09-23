@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom"
 import ThemeContext from "../CONTEXT/ThemeContext"
 import userContext from "../CONTEXT/userContext"
 import ConvoCard from "../ELEMENTS/ConvoCard"
+import ConvoCardSkeletons from "../ELEMENTS/ConvoCardSkeletons"
 import NonUserBubble from "../ELEMENTS/NonUserBubble"
 import TextBox from "../ELEMENTS/TextBox"
 import UserBubble from "../ELEMENTS/UserBubble"
@@ -54,7 +55,7 @@ const ChatRoom = ({ conversations }) => {
         scrollPoint.current?.scrollIntoView({ behavior: 'smooth' })
     }, [messages])
 
-    function removeNotifications(convoId){
+    function removeNotifications(convoId) {
         // deletes all notifications based on specific user and specific chat
         fetch(`/notifications/${convoId}`)
     }
@@ -73,10 +74,11 @@ const ChatRoom = ({ conversations }) => {
                     <div className="list-group rounded-0">
                         <li className={"list-group-item px-4 rounded-0 border-end-0 text-muted " + (isDark.current === 'true' ? " bg-dark" : "")}><h6 className="px-1">MESSAGE BOARD</h6></li>
                         {conversationList}
+                        <ConvoCardSkeletons mini={true} />
                     </div>
                 </div>
                 <div className='col-md-9 c-pad scrn-height overflow-scroll'>
-                    {displayMessages.length ? displayMessages : <h1 className={"m-1 opacity-25 " + (isDark.current === 'true' ? "text-white" : "")}>be the first to chat!</h1>}
+                    {displayMessages.length ? displayMessages : <h1 className="m-1 no-content-msg" >lets get this party started<span>❗</span></h1>}
                     <div ref={scrollPoint}></div>
                 </div>
                 <div className='col-sm-3 d-none d-md-block' ></div>
