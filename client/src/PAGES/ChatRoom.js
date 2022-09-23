@@ -66,15 +66,15 @@ const ChatRoom = ({ conversations }) => {
         else return <NonUserBubble key={message.id} message={message} isLast={i === messages.length - 1 ? true : false} />
     })
 
-    const conversationList = conversations?.map((convo) => <ConvoCard key={convo.id} convo={convo} mini={true} current={convo.id == id ? true : false} />)
+    const conversationList = conversations.length ? conversations?.map((convo) => <ConvoCard key={convo.id} convo={convo} mini={true} current={convo.id == id ? true : false} />) : null
+
     return (
         <>
             <div className={"row no-gutters" + (isDark.current === 'true' ? " bg-dark" : "")} >
                 <div className='col-sm-3 p-0 d-none d-md-block scrn-height overflow-scroll b-border-right'>
                     <div className="list-group rounded-0">
                         <li className={"list-group-item px-4 rounded-0 border-end-0 text-muted " + (isDark.current === 'true' ? " bg-dark" : "")}><h6 className="px-1">MESSAGE BOARD</h6></li>
-                        {conversationList}
-                        <ConvoCardSkeletons mini={true} />
+                        {conversationList || <ConvoCardSkeletons mini={true} />}
                     </div>
                 </div>
                 <div className='col-md-9 c-pad scrn-height overflow-scroll'>
