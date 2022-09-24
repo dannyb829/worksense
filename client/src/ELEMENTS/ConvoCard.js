@@ -3,10 +3,12 @@ import ThemeContext from "../CONTEXT/ThemeContext"
 import { formatDistance } from "date-fns"
 
 export default function ConvoCard({ convo, mini, current = false }) {
+    //theme
     const isDark = useContext(ThemeContext)
+    //notifications
     const [notifications ,setNotifications] = useState(0) 
+    //convo
     const { id, name, description, last_message } = convo
-console.log(last_message)
     const last_updated = formatDistance(Date.parse(last_message ? last_message?.created_at : convo?.created_at), new Date(), { addSuffix: true })
 
     useEffect(()=>{

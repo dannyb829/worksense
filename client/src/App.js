@@ -37,7 +37,7 @@ function App() {
       .then(resp => resp.ok ? resp.json()
         .then(data => setUser(data)) : navigate('/login'))
   }, [])
-console.log(user)
+
   useEffect(() => {
 
     const messageBoardChannel = messageBoardSocket.subscriptions.create(
@@ -47,7 +47,7 @@ console.log(user)
         connected(e) { setBoardChannel(messageBoardChannel) },
         disconnected() { console.log('disconnected') },
         // reloads messages
-        received(e) { setConversations(e); console.log('mess', e) }
+        received(e) { setConversations(e) }
       }
     )
     // setBoardChannel(messageBoardChannel)
