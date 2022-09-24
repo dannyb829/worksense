@@ -26,7 +26,7 @@ export default function InfoBar({filtered, setFiltered}) {
             <h4><span class="badge purple-lm ms-3 mt-4">unread<span class={"badge ms-2 text-bg-" + (!!user?.total_notifications ? "danger" : "secondary")}>{user?.total_notifications || 0}</span></span></h4>
             <div className="mx-3">
             <hr></hr>
-            <p className={(isDark.current === 'true' ? "text-white": "") + (!user.total_notifications ? " d-none" : "")} role='button' onClick={()=>{setFiltered(!filtered)}}><u>{filtered ? "view all" : "view unread"}</u></p>
+            <p className={(isDark.current === 'true' ? "text-white": "") + (!user?.total_notifications ? " d-none" : "")} role='button' onClick={()=>{setFiltered(!filtered)}}><u>{filtered ? "view all" : "view unread"}</u></p>
             </div>
         </>
     )
