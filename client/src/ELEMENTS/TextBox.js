@@ -6,8 +6,11 @@ import userContext from "../CONTEXT/userContext"
 
 
 export default function TextBox({chatSocket}){
+    //STATE
     const [content ,setContent] = useState('') 
+    //CONTEXT
     const {user} = useContext(userContext)
+    //PARAMS
     const { id } = useParams()
 
     function submitMessage(e) {

@@ -2,6 +2,7 @@ class User < ApplicationRecord
     has_secure_password
     has_many :messages, dependent: :destroy
     has_many :notifications, dependent: :destroy
+    has_many :conversations, through: :messages
 
     validates :username, presence: true, uniqueness: true, length: { minimum: 5},
     unless: proc { |z| z.username.blank? }

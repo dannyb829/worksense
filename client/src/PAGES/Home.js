@@ -4,6 +4,7 @@ import userContext from "../CONTEXT/userContext"
 import ConvoCard from "../ELEMENTS/ConvoCard"
 import ConversationForm from "../ELEMENTS/ConversationForm"
 import ConvoCardSkeletons from "../ELEMENTS/ConvoCardSkeletons"
+import InfoBar from "../ELEMENTS/InfoBar"
 
 export default function Home({ conversations }) {
     const { user } = useContext(userContext)
@@ -24,7 +25,9 @@ export default function Home({ conversations }) {
                     {displayConvos?.length ? displayConvos : <ConvoCardSkeletons />}
                 </div>
             </div>
-            <div className="col-md-2 d-none d-md-block"></div>
+            <div className="col-md-2 d-none d-md-block">
+                <InfoBar/>
+            </div>
         </div>
     )
 }

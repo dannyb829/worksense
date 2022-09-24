@@ -37,7 +37,7 @@ function App() {
       .then(resp => resp.ok ? resp.json()
         .then(data => setUser(data)) : navigate('/login'))
   }, [])
-
+console.log(user)
   useEffect(() => {
 
     const messageBoardChannel = messageBoardSocket.subscriptions.create(
