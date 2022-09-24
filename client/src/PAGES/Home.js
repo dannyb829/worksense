@@ -7,14 +7,13 @@ import ConvoCardSkeletons from "../ELEMENTS/ConvoCardSkeletons"
 import InfoBar from "../ELEMENTS/InfoBar"
 
 export default function Home({ conversations }) {
+    //CONTEXT
     const { user } = useContext(userContext)
     const isDark = useContext(ThemeContext)
     //STATE
     const [filtered, setFiltered] = useState(false)
 
-    const filteredConvos = filtered ? conversations.filter(convo => !!convo.notifications) : conversations
-
-    const displayConvos = user ? filteredConvos?.map(convo => <ConvoCard key={convo.id} convo={convo} />) : null
+    const displayConvos = user ? conversations?.map(convo => <ConvoCard key={convo.id} convo={convo} filtered={filtered} />) : null
 
 
 
