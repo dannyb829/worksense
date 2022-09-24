@@ -4,7 +4,7 @@ class UserSerializer < ActiveModel::Serializer
   def participation
     user_participation = object.conversations.uniq.count
     total = Conversation.count 
-    return (user_participation/total)*100 unless total == 0
+    return (user_participation/total.to_f)*100 unless total == 0
     nil
   end
 
