@@ -9,10 +9,12 @@ import InfoBar from "../ELEMENTS/InfoBar"
 export default function Home({ conversations }) {
     const { user } = useContext(userContext)
     const isDark = useContext(ThemeContext)
+    //STATE
+    const [filtered, setFiltered] = useState(false)
 
+    const filteredConvos = filtered ? conversations?.filter(convo => convo.notifications) : conversations
 
-
-    const displayConvos = user ? conversations?.map((convo) => <ConvoCard key={convo.id} convo={convo} />) : null
+    const displayConvos = user ? filteredConvos?.map(convo => <ConvoCard key={convo.id} convo={convo} />) : null
 
 
 
@@ -26,7 +28,7 @@ export default function Home({ conversations }) {
                 </div>
             </div>
             <div className="col-md-2 d-none d-md-block">
-                <InfoBar/>
+                <InfoBar filtered={filtered} setFiltered={setFiltered} />
             </div>
         </div>
     )
