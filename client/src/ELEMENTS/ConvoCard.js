@@ -19,7 +19,7 @@ export default function ConvoCard({ convo, mini, filtered, current = false }) {
 
     return (
         <>
-        <a href={`/chatroom/${id}`} className={"list-group-item list-group-item-action flex-column align-items-start list-pad " + (isDark.current === 'true' && !current ? "text-white bg-dark dark-convo-hover" : "") + (current ? " current-convo bg-gradient" : "") + (filtered && !mini ? " d-none" : "")}>
+        <a href={`/chatroom/${id}`} className={"list-group-item list-group-item-action flex-column align-items-start list-pad " + (isDark.current === 'true' && !current ? "text-white bg-dark dark-convo-hover" : "") + (current ? " current-convo bg-gradient" : "") + (filtered && notifications && !mini ? " d-none" : "")}>
         {notifications && !mini ? <span className="position-absolute top-0 end-0 badge bg-primary m-3">{notifications} new message{notifications > 1 ? 's' : ''}</span> : null}
         {notifications && mini ? <span className="position-absolute top-0 end-0 badge bg-primary m-3">{notifications}</span> : null}
             <div className="d-flex w-100 justify-content-between" >

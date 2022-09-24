@@ -1,12 +1,13 @@
-import { useContext, useState } from "react"
+import { useContext } from "react"
+import ThemeContext from "../CONTEXT/ThemeContext"
 import userContext from "../CONTEXT/userContext"
-import Validation from "./Validation"
 
 
 
 export default function InfoBar({filtered, setFiltered}) {
     //CONTEXT
     const { user } = useContext(userContext)
+    const isDark = useContext(ThemeContext)
 
     const percentage = user?.participation || 0
 
@@ -24,7 +25,7 @@ export default function InfoBar({filtered, setFiltered}) {
             <h4><span class="badge purple-lm ms-3 mt-4">unread<span class={"badge ms-2 text-bg-" + (!!user?.total_notifications ? "danger" : "secondary")}>{user?.total_notifications || 0}</span></span></h4>
             <div className="mx-3">
             <hr></hr>
-            <p role='button' onClick={()=>{setFiltered(!filtered)}}><u>{filtered ? "view all" : "view unread"}</u></p>
+            <p className={isDark.current === 'true' ? "text-white": ""} role='button' onClick={()=>{setFiltered(!filtered)}}><u>{filtered ? "view all" : "view unread"}</u></p>
             </div>
         </>
     )
