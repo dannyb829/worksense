@@ -12,7 +12,7 @@ export default function Home({ conversations }) {
     //STATE
     const [filtered, setFiltered] = useState(false)
 
-    const filteredConvos = filtered ? conversations?.filter(convo => convo.notifications) : conversations
+    const filteredConvos = filtered ? conversations.filter(convo => !!convo.notifications) : conversations
 
     const displayConvos = user ? filteredConvos?.map(convo => <ConvoCard key={convo.id} convo={convo} />) : null
 
