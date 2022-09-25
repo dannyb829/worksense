@@ -1,4 +1,4 @@
-import { useContext, useState } from "react"
+import { useContext } from "react"
 import ThemeContext from "../CONTEXT/ThemeContext"
 import userContext from "../CONTEXT/userContext"
 import ConvoCard from "../ELEMENTS/ConvoCard"
@@ -6,13 +6,13 @@ import ConversationForm from "../ELEMENTS/ConversationForm"
 import ConvoCardSkeletons from "../ELEMENTS/ConvoCardSkeletons"
 import InfoBar from "../ELEMENTS/InfoBar"
 import WelcomeHome from "../ELEMENTS/WelcomeHome"
+import { FilterContext } from "../CONTEXT/FilterContext"
 
 export default function Home({ conversations }) {
     //CONTEXT
     const { user } = useContext(userContext)
     const isDark = useContext(ThemeContext)
-    //STATE
-    const [filtered, setFiltered] = useState(false)
+    const { filtered } = useContext(FilterContext)
 
     const displayConvos = user ? conversations?.map(convo => <ConvoCard key={convo.id} convo={convo} filtered={filtered} />) : null
 
@@ -29,7 +29,7 @@ export default function Home({ conversations }) {
                 </div>
             </div>
             <div className="col-md-2 d-none d-md-block">
-                <InfoBar filtered={filtered} setFiltered={setFiltered} />
+                <InfoBar/>
             </div>
         </div>
     )

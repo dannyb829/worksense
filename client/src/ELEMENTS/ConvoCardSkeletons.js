@@ -4,9 +4,9 @@ import { useEffect, useState } from 'react';
 
 
 export default function ConvoCardSkeletons({ mini }) {
-    const [contentPending, setContentPending] = useState([...Array(5)].map(card =>
+    const [contentPending, setContentPending] = useState([...Array(5)].map((card,i)=>
     (
-        <a href='#' className="list-group-item list-group-item-action flex-column align-items-start list-pad bg-dark loading-skeleton">
+        <a href='#' key={i} className="list-group-item list-group-item-action flex-column align-items-start list-pad bg-dark loading-skeleton">
             <p className="position-absolute top-0 end-0 badge m-3">{mini ? "m" : "larger"}</p>
             <p className="mb-5 h1" style={{ width: '80%' }} >HELLOOO</p>
             <p className="mb-4">filler</p>

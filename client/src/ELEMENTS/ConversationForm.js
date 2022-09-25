@@ -27,7 +27,7 @@ export default function ConversationForm() {
 
     return (
         <>
-            <div class={"accordion rounded-0"} id="accordionExample">
+            <div className={"accordion rounded-0"} id="accordionExample">
                 <div className={"accordion-item rounded-0 border border-0 " + (isDark.current === 'true' ? 'bg-dark text-white' : '')}>
                     <h1 className="accordion-header text-white" id="headingTwo">
                         <button className={"accordion-button border border-0 collapsed " + (isDark.current === 'true' ? "bg-dark text-white" : "")} type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">

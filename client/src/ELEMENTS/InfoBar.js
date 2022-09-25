@@ -1,14 +1,15 @@
 import { useContext } from "react"
+import { FilterContext } from "../CONTEXT/FilterContext"
 import ThemeContext from "../CONTEXT/ThemeContext"
 import userContext from "../CONTEXT/userContext"
 
 
 
-export default function InfoBar({filtered, setFiltered, inNav = false}) {
+export default function InfoBar({inNav = false}) {
     //CONTEXT
     const { user } = useContext(userContext)
     const isDark = useContext(ThemeContext)
-
+    const { filtered, setFiltered } = useContext(FilterContext)
     const percentage = user?.participation || 0
     
     const encouragement = () => {
@@ -30,7 +31,7 @@ export default function InfoBar({filtered, setFiltered, inNav = false}) {
                     aria-valuemin="0"
                     aria-valuemax="100">{percentage}</div>
             </div>
-            <h4><span class="badge purple-lm ms-3 mt-4">unread<span class={"badge ms-2 text-bg-" + (!!user?.total_notifications ? "danger" : "secondary")}>{user?.total_notifications || 0}</span></span></h4>
+            <h4><span className="badge purple-lm ms-3 mt-4">unread<span className={"badge ms-2 text-bg-" + (!!user?.total_notifications ? "danger" : "secondary")}>{user?.total_notifications || 0}</span></span></h4>
             <div className="mx-3">
             <hr></hr>
             <p className={(isDark.current === 'true' || inNav ? "text-white": "") + (!user?.total_notifications ? " d-none" : "")} role='button' onClick={()=>{setFiltered(!filtered)}}><u>{filtered ? "view all" : "view unread"}</u></p>

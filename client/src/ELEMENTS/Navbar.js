@@ -12,7 +12,6 @@ export default function NavBar(){
   //NAVIGATE
   const navigate = useNavigate()
   //STATE
-  const [filtered, setFiltered] = useState(false)
   const theme = isDark.current === 'true' ? "dark" : "light"
 
     function handleThemeSwitch() {
@@ -80,7 +79,7 @@ export default function NavBar(){
               </li> : null}
             </ul>
 
-            <InfoBar filtered={filtered} setFiltered={setFiltered} inNav={true} />
+            <InfoBar inNav={true} />
 
 
           </div>

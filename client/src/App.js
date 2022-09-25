@@ -11,6 +11,7 @@ import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import EditProfile from './PAGES/EditProfile';
 import { SocketContext } from '.';
+import { FilterContext } from './CONTEXT/FilterContext';
 
 
 
@@ -19,6 +20,7 @@ function App() {
   //STATE
   const [user, setUser] = useState(null)
   const [conversations, setConversations] = useState([])
+  const [filtered, setFiltered] = useState(false)
   //REF
   const isDark = useRef(localStorage.getItem('darkmode'))
   //NAVIGATE
@@ -63,6 +65,7 @@ function App() {
     <>
       <ThemeContext.Provider value={isDark}>
         <userContext.Provider value={{ user, setUser }}>
+        <FilterContext.Provider value={{ filtered, setFiltered }}>
           <NavBar />
           <Routes>
             <Route path='/' element={<Home conversations={conversations} />} />
@@ -70,6 +73,7 @@ function App() {
             <Route path='/profile' element={<EditProfile />} />
             <Route path='/chatroom/:id' element={<ChatRoom conversations={conversations} />} />
           </Routes>
+        </FilterContext.Provider>
           <ToastContainer position="bottom-right" theme={isDark.current === 'true' ? 'dark' : 'light'} />
         </userContext.Provider>
       </ThemeContext.Provider>
