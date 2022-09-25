@@ -3,13 +3,16 @@ import { useNavigate } from "react-router-dom"
 import ThemeContext from "../CONTEXT/ThemeContext"
 import userContext from "../CONTEXT/userContext"
 import { toast } from 'react-toastify'
+import InfoBar from "./InfoBar"
 
 export default function NavBar(){
-
+  //CONTEXT
   const isDark = useContext(ThemeContext)
   const {user, setUser} = useContext(userContext)
+  //NAVIGATE
   const navigate = useNavigate()
-
+  //STATE
+  const [filtered, setFiltered] = useState(false)
   const theme = isDark.current === 'true' ? "dark" : "light"
 
     function handleThemeSwitch() {
@@ -53,7 +56,7 @@ export default function NavBar(){
             ></button>
           </div>
           <div className={"offcanvas-body show text-white" + (isDark.current === 'true' ? " bg-dark" : " purple-lm") } >
-            <ul className={"navbar-nav justify-content-end flex-grow-1 pe-3"}>
+            <ul className={"navbar-nav justify-content-end flex-grow-1 pe-3 m-3"}>
               { user ? <li className="nav-item">
                 <a className="nav-link active" aria-current="page" href="/">Home</a>
               </li> : null}
@@ -76,6 +79,10 @@ export default function NavBar(){
                 </ul>
               </li> : null}
             </ul>
+
+            <InfoBar filtered={filtered} setFiltered={setFiltered} inNav={true} />
+
+
           </div>
         </div>
       </div>
