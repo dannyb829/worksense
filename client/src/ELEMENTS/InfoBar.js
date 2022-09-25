@@ -13,7 +13,7 @@ export default function InfoBar({filtered, setFiltered}) {
     
 
     return (
-        <>
+        <div className="sticky-top" style={{zIndex: 1}}>
             <h3 className="mt-3 text-purple"><b className="ms-3">participation</b></h3>
             <div className="progress mx-3 mt-4">
                 <div className="progress-bar"
@@ -28,6 +28,6 @@ export default function InfoBar({filtered, setFiltered}) {
             <hr></hr>
             <p className={(isDark.current === 'true' ? "text-white": "") + (!user?.total_notifications ? " d-none" : "")} role='button' onClick={()=>{setFiltered(!filtered)}}><u>{filtered ? "view all" : "view unread"}</u></p>
             </div>
-        </>
+        </div>
     )
 }
