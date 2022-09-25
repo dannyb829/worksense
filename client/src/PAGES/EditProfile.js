@@ -144,8 +144,7 @@ export default function EditProfile() {
             <div className={"col-md-3 d-none d-md-block " + (isDark.current === 'true' ? "bg-dark" : "")}></div>
             <div className={"col-md-6 justify-content-center align-items-center text-center " + (isDark.current === 'true' ? "bg-dark text-white" : "")}>
                 <Tippy content={<b>click to change image</b>} placement="bottom" >
-
-                <img onClick={imgInputClick} role="button" src={displayedImageUrl()} className="rounded-circle img-fluid m-5 mx-auto border border-5 d-block profile-picture" alt="profile picture" data-tip="React-tooltip"></img>
+                <img onClick={imgInputClick} role="button" src={displayedImageUrl()} className="rounded-circle img-fluid m-5 mx-auto border border-5 d-block profile-picture" alt="profile picture"></img>
                 </Tippy>
 
                 <input ref={imageSet} className='d-none' accept="image/*" type="file" name='image_url' onChange={handleImageSelect}></input>
