@@ -19,7 +19,6 @@ postgresdb
 
 bootstrap css styled
 
-currently deployed to heroku https://worksense.herokuapp.com
 
 
 # creator Daniel Brito
