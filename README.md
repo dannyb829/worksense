@@ -19,6 +19,6 @@ postgresdb
 
 bootstrap css styled
 
-
+configuration in place for heroku deployment though deployment was withdrawn
 
 # creator Daniel Brito
